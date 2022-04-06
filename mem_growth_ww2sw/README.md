@@ -1,5 +1,7 @@
 # Sample app to reproduce memory growth in Chrome 
 
+This sample app simulate a particular scenario in which when the application eagerly wants to peek for any pending messages in the service worker message queue. This results into continuous memory growth in Chrome till it Aw Snaps. OTOH firefox memory stays constant.
+
 
 #### Steps to reproduce memory growth 
 * cd mem_growth_ww2sw
@@ -8,7 +10,7 @@
 * click reload button to reload after service worker is installed
 * open Chrome task manager
 
-Notice: That the memory footprint in Chrome increases rapidly till it Aw Snap! whereas in firefox the memory in firefox remains constant for the web app.
+Notice: That the memory footprint in Chrome increases rapidly, whereas in firefox the memory in firefox remains constant for the web app.
 
 
 ### Begin
