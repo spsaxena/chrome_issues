@@ -1,7 +1,7 @@
 
-function peek(i) {
+function peek() {
   var request = new XMLHttpRequest();
-  request.open("GET", "/messsages?action=peek&sourceid=" + i.toString(), false); // sync call to check if SW queue is populated
+  request.open("GET", "/messsages?action=peek", false); // sync call to check if SW queue is populated
 
   try {
     request.send(null);
@@ -24,16 +24,14 @@ function peekMessage(i) {
 
 (function start() {
     console.log("@@@@@@@@@@@ start +");
-    let i = 1;
     do {
-        var msg = peekMessage(i);
+        var msg = peekMessage();
         if (msg) {
             console.log('%c' + "RECEIVED: " + msg, 'color:' + 'yellow' + ';background-color: #444; padding: 3px 7px; margin-left: -7px;');
             break;
         }
-        i=i+1;
     }
-    while(i<40000);
+    while(1);
     console.log("@@@@@@@@@@@ end +");
 })();
 

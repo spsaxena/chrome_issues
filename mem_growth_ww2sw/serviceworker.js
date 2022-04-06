@@ -12,7 +12,6 @@ self.addEventListener('activate', function(event){
 
 self.addEventListener('fetch', function(e) {
   let urlObj = new URL(e.request.url);
-  let winSourceId = urlObj.searchParams.get("sourceid");
 
   switch (urlObj.searchParams.get("action")) {
       case "peek":
