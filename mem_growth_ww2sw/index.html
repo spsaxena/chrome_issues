@@ -1,0 +1,43 @@
+<html>
+  <body>
+      <button type="button" id="myBtn">Reload</button>
+
+  <script>
+     if (!navigator.serviceWorker || !navigator.serviceWorker.register) {
+        console.log("This browser doesn't support service workers");
+    }
+    else {
+      // Listen to messages from service workers.
+      navigator.serviceWorker.addEventListener('message', function(event) {
+          console.log("Got reply from service worker: " + event.data);
+      });
+
+      // Register a service worker to control
+      // Note that it won't control this instance of this page, it only takes effect
+      // for pages in its scope loaded *after* it's installed.
+      if (!navigator.serviceWorker.controller) {
+        console.log("navigator.serviceWorker.controller is null");
+
+        navigator.serviceWorker.register("serviceworker.js")
+            .then(function(swr) {
+                console.log("Service worker registered, scope: " + swr.scope);
+                console.log("Refresh the page to talk to it.");
+
+                document.getElementById("myBtn").textContent = 'Refresh page';
+                document.getElementById("myBtn").addEventListener("click", () => {
+                  // If we want to, we might do `location.reload();` so that we'd be controlled by it
+                  window.location.reload();
+                });
+
+            })
+            .catch(function(error) {
+                console.log("Service worker registration failed: " + error.message);
+            });
+        }
+        else {
+        var w = new Worker('webworker.js');
+      } 
+    }
+  </script>
+  </body>
+</html>
